@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+  
+
+
+       
+       <section class="content">
+
+
+
+              <div class="cad">
+              <div class="body">
+              <div class="panel panel-default panel-post">
+              <div class="panel-heading">
+              <div class="media">
+              <div class="media-left">
+              <a href="#">
+              <!---<img class="profile-img" src="https://i.postimg.cc/YqvW2Ltq/20250130-134520.jpg" />-->
+              <img class="profile-img" src="../../images/user.png" />
+
+              </a>
+              </div>
+              
+              <div class="media-body">
+              
+              <h4 class="media-heading">
+            
+              <a href="#" style="color:#000" >shakshi verma </a><i style="color:#fff" >..........</i> <i class="money" >₹200.00</i><br>
+              <small> Note: salary january 25</small><br>
+              <small style="color:grey; font-weight:bold;" >10 April 25</small><i style="color:#fff" >.........................</i> <small color="" >Status : </small><small style="color:green; font-weight:bold;"  >Success</small>
+              </h4>
+
+              </div>
+              </div>
+              </div>
+                                          
+              </div>
+              </div>
+              </div>
+              
+              
+              
+              <div class="cad">
+              <div class="body">
+              <div class="panel panel-default panel-post">
+              <div class="panel-heading">
+              <div class="media">
+             <small style="color:grey; font-weight:;" >10 April 25</small><i style="color:#fff" >.....................................</i> <small style="color:grey" >Status : </small><small style="color:green; font-weight:;"  >Success</small>
+              <div class="media-left">
+              <a href="#">
+              <!---<img class="profile-img" src="https://i.postimg.cc/YqvW2Ltq/20250130-134520.jpg" />-->
+              <img class="profile-img" src="../../images/user.png" />
+              
+              </a>
+              </div>
+           
+              
+
+              <div class="media-body">
+              
+              <h4 class="media-heading">
+              
+              <a href="#" style="color:#000" >shaksnfn </a><i style="color:#fff" >..........</i> <i class="money" >₹200.00</i><br>
+              <small> Note: salary january 25</small><br>
+ 
+              </h4>
+              
+              </div>
+              </div>
+              </div>
+              
+              </div>
+              </div>
+              </div>
+              
+
+
+
+
+           <div class="cad">
+           <div class="body">
+           <div class="panel panel-default panel-post">
+           <div class="panel-heading">
+           <div class="media">
+          <small style="color:grey; font-weight:;" >${formattedDate}</small><i style="color:#fff" >.................</i> <small style="color:grey" >Status : </small><small style="color:green; font-weight:;"  >Success</small>
+           <div class="media-left">
+           <a href="#">
+           <!---<img class="profile-img" src="https://i.postimg.cc/YqvW2Ltq/20250130-134520.jpg" />-->
+           <img class="profile-img" src="${item.photo}" />
+           
+           </a>
+           </div>
+        
+           
+
+           <div class="media-body">
+           
+           <h4 class="media-heading">
+           
+           <a href="#" style="color:#000" >${item.name}</a><i style="color:#fff" >..........</i> <i class="money"  >₹200.00</i><br>
+           <small> Note: salary january 25</small><br>
+ 
+           </h4>
+           
+           </div>
+           </div>
+           </div>
+           
+           </div>
+           </div>
+           </div>
+           
+
+
+
+<style type="text/css"> .money{ font-size:18px; font-weight:bold; position:absolute;  text-align:right; } .pm{text-align:right;}
+   </style>
+
+
+
+
+
+     
+     <!-- Spinner Element -->
+     <div id="spinner"></div>
+     
+     <!-- Card Container -->
+     <div id="card-container"></div>
+       
+       </section>
+
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxAVROCSR2IrlAgQ7zil_EV60T2UnXr5T3Uiex71ESq3B_oZygrzx5kv23RxnzHgKrbnQ/exec"; // Replace with your App Script URL
+
+  // Show the spinner
+  document.getElementById('spinner').style.display = 'block';
+
+  // Fetch data and display cards
+  fetch(scriptURL)
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('card-container');
+      document.getElementById('spinner').style.display = 'none'; // Hide the spinner
+      
+data.reverse().forEach(item => {
+        const formattedDate = formatDate(item.date);
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        card.innerHTML = `
+
+  <div class="bdy">
+  <div class="panel panel-default panel-post">
+  <div class="panel-heading">
+  <div class="media">
+  <small style="color:grey; font-weight:;" >${formattedDate}</small><i style="color:#fff" >....</i> <small style="color:grey" >Status : </small><small style="color:green; font-weight:;"  >Success</small>
+  <div class="media-left">
+  <a href="#">
+  <!---<img class="profile-img" src="https://i.postimg.cc/YqvW2Ltq/20250130-134520.jpg" />-->
+  <img class="profile-img" src="${item.photo}" />
+  
+  </a>
+  </div>
+  
+  
+  
+  <div class="media-body">
+  
+  <h4 class="media-heading">
+  
+  <a href="#" style="color:#000" >${item.name}</a><i style="color:#fff" >..........</i> <i class="money" >₹200.00</i><br>
+  <small> Note: salary january 25</small><br>
+  
+  </h4>
+  
+  </div>
+  </div>
+  </div>
+  
+  </div>
+  </div>
+
+        
+        `;
+
+        container.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+      document.getElementById('spinner').style.display = 'none'; // Hide spinner on error
+      alert("Failed to load data. Please try again later.");
+    });
+
+  // Date Formatting Function
+  function formatDate(dateString) {
+    const options = { 
+      weekday: 'short', year: '2-digit', month: 'short', 
+      day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true 
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IN', options);
+  }
+</script>
+
+<style>
+
+   .line1{
+      margin-left:10px;
+   }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    #spinner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+     .profile-img {
+     border: 0.7px solid black;
+     }
+     
+     .bluetick {
+     width: 1px; /* या अपनी आवश्यक चौड़ाई */
+
+
+     }
+  </style>
+
+</body>
+</html>
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/examples/profile.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+
+</html>

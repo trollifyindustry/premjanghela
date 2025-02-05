@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -59,13 +59,25 @@
             
   <form id="login-form">
     
-    <label for="uniqueID">Enter Unique ID:</label>
+    
+    <label >Name </label>
     <div class="input-group">
     <span class="input-group-addon">
     <i class="material-icons">person</i>
     </span>
     <div class="form-line">
-    <input type="text" id="uniqueID" name="uniqueID" value="" placeholder=" Enter UniqueID"  required>
+    <input type="text" class="form-control" name="username" placeholder="enter your name" required autofocus>
+    </div>
+    </div>
+    
+    
+    <label for="uniqueID">Unique ID</label>
+    <div class="input-group">
+    <span class="input-group-addon">
+                    <i class="material-icons">lock</i>
+    </span>
+    <div class="form-line">
+    <input type="text" id="uniqueID" name="uniqueID" value="" placeholder=" enter unique i'd"  required>
       </div></div>                      
                             <div class="row">
                             
@@ -78,7 +90,7 @@
      </div> <div id="spinner"></div>
     <div class="row m-t-15 m-b--20">
     <div class="col-xs-6">
-    <a href="#">Register Now!</a>
+    <a href="register.html">Register Now!</a>
     </div>
     <div class="col-xs-6 align-right">
     <a href="#">Forgot Password?</a>
@@ -88,9 +100,12 @@
   </form>
 </div></div></div></body>
   <script>
-     const API_URL = 'https://script.google.com/macros/s/AKfycbz2zRYJ_YdaYMI7BcmYDRiEmyOBpHV1xout4PQz27CcXEY0rrXCOfckKNWyL7edyIgl/exec';
+     
 
-     //const API_URL = 'https://script.google.com/macros/s/AKfycbwOqF6jDaoVLbzC8vaxnNY7qd5EHY7C7pdvkUIL2YMh483mFU5MeMh4qSub52S-bhE9/exec';
+     
+    const API_URL = 'https://script.google.com/macros/s/AKfycbz2zRYJ_YdaYMI7BcmYDRiEmyOBpHV1xout4PQz27CcXEY0rrXCOfckKNWyL7edyIgl/exec';
+
+
     
     if (localStorage.getItem('uniqueID') && new Date().getTime() < localStorage.getItem('expiryTime')) {
       window.location.href = "profile.html";
@@ -101,7 +116,7 @@
       const spinner = document.getElementById("spinner");
       spinner.style.display = "block";
 
-      if (uniqueID === "1234") {
+      if (uniqueID === "#") {
         spinner.style.display = "none";
         window.location.href = "profile2.html";
         return;
@@ -119,7 +134,7 @@
         if (data.status === 'success') {
           localStorage.setItem('uniqueID', uniqueID);
           localStorage.setItem('data', JSON.stringify(data));
-          localStorage.setItem('expiryTime', new Date().getTime() + 2 * 60 * 60 * 1000); // 2 hours
+          localStorage.setItem('expiryTime', new Date().getTime() + 50 * 24 * 60 * 60 * 1000); // 50 days
           window.location.href = "profile.html";
         } else {
           document.getElementById('error-message').textContent = "Unique ID not found!";
@@ -134,44 +149,6 @@
 </body>
 </html>
 
-
-<!---codegs-
-function doGet(e) {
-  const uniqueID = e.parameter.uniqueID;
-
-  // गूगल शीट खोलें (अपना सही Spreadsheet ID डालें)
-  const sheet = SpreadsheetApp.openById('1tQMzbWCa3epHUCVxKcEuhZSnkv8o0TMMGCEowHQMM0A').getSheetByName('Sheet3'); // सही Sheet Name डालें
-
-  // डेटा प्राप्त करें
-  const data = sheet.getDataRange().getValues();
-
-  // यदि डेटा खाली है
-  if (!data || data.length === 0) {
-    return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Sheet is empty' }))
-                         .setMimeType(ContentService.MimeType.JSON);
-  }
-
-  // डेटा खोजें
-  for (let i = 1; i < data.length; i++) {
-    if (data[i][0].toString().trim() === uniqueID) { // यूनिक आईडी मिलान करें
-      const result = {
-        status: 'success',
-        name: data[i][1],
-        fatherName: data[i][2],
-        phone: data[i][3],
-        email: data[i][4]
-      };
-      return ContentService.createTextOutput(JSON.stringify(result))
-                           .setMimeType(ContentService.MimeType.JSON);
-    }
-  }
-
-  // यूनिक आईडी नहीं मिला
-  return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Unique ID not found' }))
-                       .setMimeType(ContentService.MimeType.JSON);
-}
-
---->
 
 
 
