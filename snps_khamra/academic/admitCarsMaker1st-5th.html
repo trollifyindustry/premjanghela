@@ -248,9 +248,18 @@
     <label for="date3">Date: </label> <input type="date" id="date3">
     <label for="time3">Time: </label> <input type="text" id="time3" value="09:00 AM to 12:00 PM">
     <br><br>
-    <label for="subject4">Subject 4: </label> <input type="text" id="subject4" value="Science">
+    <label for="subject4">Subject 4: </label> <input type="text" id="subject4" value="so, s">
     <label for="date4">Date: </label> <input type="date" id="date4">
-    <label for="time4">Time: </label> <input type="text" id="time4" value="09:00 AM to 12:00 PM"> 
+    <label for="time4">Time: </label> <input type="text" id="time4" value="09:00 AM to 12:00 PM">
+    <br><br>
+    <label for="subject5">Subject 5: </label> <input type="text" id="subject5" value="sanskrit">
+    <label for="date5">Date: </label> <input type="date" id="date5">
+    <label for="time5">Time: </label> <input type="text" id="time5" value="09:00 AM to 12:00 PM">
+    <br><br>
+    
+    <label for="subject6">Subject 6: </label> <input type="text" id="subject6" value="Science">
+    <label for="date6">Date: </label> <input type="date" id="date6">
+    <label for="time6">Time: </label> <input type="text" id="time6" value="09:00 AM to 12:00 PM">
 </div>
 
 <!-- Print Button -->
@@ -271,8 +280,10 @@
             { subject: document.getElementById("subject1").value, date: document.getElementById("date1").value, time: document.getElementById("time1").value },
             { subject: document.getElementById("subject2").value, date: document.getElementById("date2").value, time: document.getElementById("time2").value },
             { subject: document.getElementById("subject3").value, date: document.getElementById("date3").value, time: document.getElementById("time3").value },
-            { subject: document.getElementById("subject4").value, date: document.getElementById("date4").value, time: document.getElementById("time4").value }
-        ];
+            { subject: document.getElementById("subject4").value, date: document.getElementById("date4").value, time: document.getElementById("time4").value },
+            { subject: document.getElementById("subject5").value, date: document.getElementById("date5").value, time: document.getElementById("time5").value },
+            { subject: document.getElementById("subject6").value, date: document.getElementById("date6").value, time: document.getElementById("time6").value }
+            ];
 
         // Loop through each student row
         for (let row of studentTable.rows) {
