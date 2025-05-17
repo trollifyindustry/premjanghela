@@ -1,36 +1,145 @@
-﻿<!DOCTYPE html>
-<html ng-app="adminbsb">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>AdminBSB - Material Design | Documentation</title>
+    <title>SNPS Khamra | Design trollify Industry | 975-277-6923</title>
+    <!-- Favicon-->
+    <link rel="icon" href="https://i.postimg.cc/y8Lmht9r/20250516-121421.png" type="image/x-icon">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"> </script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-    <link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../plugins/node-waves/waves.min.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
-    <link href="../css/themes/theme-red.min.css" rel="stylesheet" />
-    <link href="plugins/syntaxhighlighter/styles/shThemeMidnight.css" rel="stylesheet" />
-    <link href="css/documentation.css" rel="stylesheet" />
+
+    <!-- Bootstrap Core Css -->
+    <link href="https://trollifyindustry.github.io/premjanghela/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="https://trollifyindustry.github.io/premjanghela/plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="https://trollifyindustry.github.io/premjanghela/plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="https://trollifyindustry.github.io/premjanghela/plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="https://trollifyindustry.github.io/premjanghela/css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="https://trollifyindustry.github.io/premjanghela/css/themes/all-themes.css" rel="stylesheet" />
 </head>
+
 <body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Trollify Industry</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="#/">
-                    ADMINBSB - MATERIAL DESIGN
-                    <p>DOCUMENTATION</p>
-                </a>
+                <a class="navbar-brand" href="index.html">SNPS KHAMRA</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="https://github.com/gurayyarar/AdminBSBMaterialDesign">GitHub</a></li>
+                    <!-- Call Search -->
+                    <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">7</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Prem Janghela joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 04/04/2025
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count">9</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Dashboard Task
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
                 </ul>
             </div>
         </div>
@@ -39,92 +148,318 @@
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="https://i.postimg.cc/qMQVfB00/about.jpg" width="50" height="50" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prem Janghela</div>
+                    <div class="email">premjanghela02@gmail.com</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Users</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i><button id="logoutBtn">Logout</button></a></li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+            <!-- #User Info -->
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
-                    <li class="header">HELP CONTENTS</li>
-                    <li ng-class="url == '' ? 'active' : ''">
-                        <a href="#/" class="waves-effect waves-block">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="active">
+                        <a href="index.html">
                             <i class="material-icons">home</i>
-                            <span>Introduction</span>
-                        </a>
-                    </li>
-                    <li ng-class="url == 'download' ? 'active' : ''">
-                        <a href="#/download" class="waves-effect waves-block">
-                            <i class="material-icons">file_download</i>
-                            <span>Download</span>
-                        </a>
-                    </li>
-                    <li ng-class="url == 'file-structure' ? 'active' : ''">
-                        <a href="#/file-structure" class="waves-effect waves-block">
-                            <i class="material-icons">chrome_reader_mode</i>
-                            <span>File Structure</span>
-                        </a>
-                    </li>
-                    <li ng-class="url == 'dependencies' ? 'active' : ''">
-                        <a href="#/dependencies" class="waves-effect waves-block">
-                            <i class="material-icons">developer_mode</i>
-                            <span>Dependencies</span>
-                        </a>
-                    </li>
-                    <li ng-class="url == 'plugins' ? 'active' : ''">
-                        <a href="#/plugins" class="waves-effect waves-block">
-                            <i class="material-icons">widgets</i>
-                            <span>Plugins</span>
-                        </a>
-                    </li>
-                    <li ng-class="url == 'helper-classes' ? 'active' : ''">
-                        <a href="#/helper-classes" class="waves-effect waves-block">
-                            <i class="material-icons">layers</i>
-                            <span>Helper Classes</span>
-                        </a>
-                    </li>
-                    <li ng-class="url == 'colors' ? 'active' : ''">
-                        <a href="#/colors" class="waves-effect waves-block">
-                            <i class="material-icons">color_lens</i>
-                            <span>Colors</span>
-                        </a>
-                    </li>
-                    <li ng-class="url == 'javascript-options' ? 'active' : ''">
-                        <a href="#/javascript-options" class="waves-effect waves-block">
-                            <i class="material-icons">code</i>
-                            <span>Javascript Options</span>
+                            <span>Home</span>
                         </a>
                     </li>
                     <li>
+                        <a href="pages/typography.html">
+                            <i class="material-icons">person_add</i>
+                            <span>Admission Now</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pages/helper-classes.html">
+                            <i class="material-icons">receipt</i>
+                            <span>Admission Form Print</span>
+                        </a>
+                    </li>
+                  
+                   <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">widgets</i>
-                            <span>Component</span>
+                            <i class="material-icons">filter_frames</i>
+                            <span>Marksheet's</span>
                         </a>
                         <ul class="ml-menu">
-                            <li ng-class="url == 'component-card' ? 'active' : ''">
-                                <a href="#/component-card">
-                                    <span>Card</span>
+                            <li>
+                                <a href="system/marksheet/nurseryKg.html">
+                                    <span>LKG 1-2 to Nursery</span>
                                 </a>
                             </li>
-                            <li ng-class="url == 'component-infobox' ? 'active' : ''">
-                                <a href="#/component-infobox">
-                                    <span>Infobox</span>
+                            <li>
+                                <a href="system/marksheet/1st5th.html">
+                                    <span>1st to 4th</span>
                                 </a>
+                            </li>
+                            <li>
+                                <a href="system/marksheet/6th8th.html">
+                                    <span>6th to 8th</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Marksheet database Link's</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="https://docs.google.com/spreadsheets/d/1CRM2h2_wp4xFPpgi9WL6JYk4To0zeFkpom1D3VeZyRk/edit?gid=507420357#gid=507420357">
+                                            <span>LKG 1-2 to Nursery</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://docs.google.com/spreadsheets/d/1CRM2h2_wp4xFPpgi9WL6JYk4To0zeFkpom1D3VeZyRk/edit?gid=998408455#gid=998408455">
+                                            <span>1st to 4th</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://docs.google.com/spreadsheets/d/1CRM2h2_wp4xFPpgi9WL6JYk4To0zeFkpom1D3VeZyRk/edit?gid=1205974257#gid=1205974257">
+                                            <span>6th to 8th</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Previous Year Markssheet's</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="#">
+                                            <span>2024 - 2025 PDF download</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span>2023 - 2024 PDF download</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                          
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">school</i>
+                            <span>Academic</span>
+                        </a>
+                        <ul class="ml-menu">
+                          <!-----select-------->
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Admid Cards</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="#">LKG 1-2 to Nursery</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">1st Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">2nd Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">3rd Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">4th Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">5th Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">6th Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">7th Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">8th Class</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><b>Admit Card Database Link</b></a>
+                                    </li>
+                                </ul>
+                            </li>
+                         <!----end-select--------> 
+                          
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Hosting</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="imgHost/index.html">Images Hosting</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="url == 'browser-support' ? 'active' : ''">
-                        <a href="#/browser-support" class="waves-effect waves-block">
-                            <i class="material-icons">important_devices</i>
-                            <span>Browser Support</span>
+                  <!---select--------> 
+                  <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">payment</i>
+                            <span>Student's Fee</span>
+                        </a>
+                        <ul class="ml-menu">
+                           <li>
+                                <a href="#">Student Fee Details </a>
+                            </li>
+                           <li>
+                                <a href="#">Pay student fee </a>
+                            </li>
+                            <li>
+                                <a href="#">Sheet Link</a>
+                            </li>
+                        </ul>
+                    </li>
+                  
+                  <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">people_outline</i>
+                            <span>Student's</span>
+                        </a>
+                        <ul class="ml-menu">
+                           <li>
+                                <a href="#">Student Details</a>
+                            </li>
+                            <li>
+                                <a href="#">Sheet Link</a>
+                            </li>
+                        </ul>
+                    </li>
+                  
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">people</i>
+                            <span>Teacher's</span>
+                        </a>
+                        <ul class="ml-menu">
+                           <li>
+                                <a href="#">Teacher's Attandance Form</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly Salary Report</a>
+                            </li>
+                            <li>
+                                <a href="#">Teacher's Salary Update</a>
+                            </li>
+                            <li>
+                                <a href="#">Teacher's Leave Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                  
+                  
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">swap_calls</i>
+                            <span>User Interface (UI)</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="https://docs.google.com/spreadsheets/d/1m1zsJTUAgLiB2rcrXnBvoGSQbhl8bviNdKTV96-EUtU/edit?gid=0#gid=0">Dashboard Link</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">assignment</i>
+                            <span>Forms</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">Admission Form PDF</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">perm_media</i>
+                            <span>Medias</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">Image Gallery</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">view_carousel</i>
+                            <span>Users Pages</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">Profile</a>
+                            </li>
+                            <li>
+                                <a href="#">Sign In</a>
+                            </li>
+                            <li>
+                                <a href="#">Sign Up</a>
+                            </li>
+                            <li>
+                                <a href="#">Forgot Password</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">map</i>
+                            <span>Maps</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="#">Google Map</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="#">
+                            <i class="material-icons">update</i>
+                            <span>Changelogs | Prem Janghela</span>
                         </a>
                     </li>
-                    <li ng-class="url == 'faq' ? 'active' : ''">
-                        <a href="#/faq" class="waves-effect waves-block">
-                            <i class="material-icons">question_answer</i>
-                            <span>FAQ</span>
+                    <li class="header">LABELS</li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons col-red">donut_large</i>
+                            <span>Important</span>
                         </a>
                     </li>
-                    <li ng-class="url == 'license' ? 'active' : ''">
-                        <a href="#/license" class="waves-effect waves-block">
-                            <i class="material-icons">description</i>
-                            <span>License</span>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons col-amber">donut_large</i>
+                            <span>Warning</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <i class="material-icons col-light-blue">donut_large</i>
+                            <span>Information</span>
                         </a>
                     </li>
                 </ul>
@@ -133,34 +468,450 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+                    &copy;2025 <a href="javascript:void(0);">Trollify Industry</a> CEO Prem Janghela
                 </div>
                 <div class="version">
-                    <b>Current Version: </b> 1.0.5
+                    <b>Version: </b> 1.0.5
                 </div>
             </div>
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
     </section>
-
     <section class="content">
         <div class="container-fluid">
-            <div ng-view></div>
+            <div class="block-header">
+               <div class="">
+                    <div class="card">
+                        <div class="header bg-brown">
+                            <h2>
+                               Online Student Form Submission to Google Sheet <small>Ek simple HTML form jisme student ka data bharte hi wo Google Sheet me automatically save ho jaye.</small>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i class="material-icons">mic</i>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);">Action</a></li>
+                                        <li><a href="javascript:void(0);">Another action</a></li>
+                                        <li><a href="javascript:void(0);">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                          <h4>Code gs for App Script | Google Sheet</h4>
+                            <pre>function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  
+  var row = [];
+  for (var i = 0; i < headers.length; i++) {
+    var field = headers[i];
+    row.push(e.parameter[field] || ""); // agar field nahi bheja to blank
+  }
+  
+  sheet.appendRow(row);
+  return ContentService.createTextOutput("Success");
+}</pre> <br><h4> index.html code </h4>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Submit Form to Google Sheet&lt;/title&gt;
+  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/sweetalert2@11&quot;&gt;&lt;/script&gt;
+  &lt;style&gt;
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    input {
+      padding: 8px;
+      margin: 5px 0;
+      width: 300px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;Student Form&lt;/h2&gt;
+  &lt;form id=&quot;myForm&quot;&gt;
+    &lt;label&gt;Name:&lt;br&gt;&lt;input type=&quot;text&quot; id=&quot;Name&quot; name=&quot;Name&quot; required&gt;&lt;/label&gt;&lt;br&gt;
+    &lt;label&gt;Father:&lt;br&gt;&lt;input type=&quot;text&quot; id=&quot;Father&quot; name=&quot;Father&quot; required&gt;&lt;/label&gt;&lt;br&gt;
+    &lt;label&gt;Phone:&lt;br&gt;&lt;input type=&quot;text&quot; id=&quot;Phone&quot; name=&quot;Phone&quot; required&gt;&lt;/label&gt;&lt;br&gt;
+    &lt;label&gt;Email:&lt;br&gt;&lt;input type=&quot;email&quot; id=&quot;Email&quot; name=&quot;Email&quot; required&gt;&lt;/label&gt;&lt;br&gt;
+    &lt;label&gt;Address:&lt;br&gt;&lt;input type=&quot;text&quot; id=&quot;Address&quot; name=&quot;Address&quot; required&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+    &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;script&gt;
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxFnyTIPoQVVQlmnruhBrZw-tbQT5P_sBBPY7DD-OZPPOjk6byebmO78kMydjxzs_CYuw/exec'; // &lt;-- yahan apna URL daalo
+    const form = document.getElementById('myForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to submit this form?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, submit it!',
+        cancelButtonText: 'Cancel'
+      }).then((result) =&gt; {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Submitting...',
+            html: 'Please wait',
+            allowOutsideClick: false,
+            didOpen: () =&gt; {
+              Swal.showLoading();
+            }
+          });
+
+          const formData = new FormData(form);
+          fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response =&gt; {
+              Swal.fire({
+                title: 'Success!',
+                text: 'Your form has been submitted.',
+                icon: 'success',
+              });
+              form.reset();
+            })
+            .catch(error =&gt; {
+              Swal.fire('Error!', error.message, 'error');
+            });
+        }
+      });
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                        </div>
+                    </div>
+                </div>
+              
+              
+              
+              
+               
+            </div>
         </div>
     </section>
+    <!-- Jquery Core Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/jquery/jquery.min.js"></script>
 
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-route.min.js"></script>
-    <script src="../plugins/jquery/jquery.min.js"></script>
-    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../plugins/node-waves/waves.min.js"></script>
-    <script src="../plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="plugins/syntaxhighlighter/scripts/shCore.js"></script>
-    <script src="plugins/syntaxhighlighter/scripts/shAutoloader.js"></script>
-    <script src="js/app.js"></script>
-    <script>
+    <!-- Bootstrap Core Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/bootstrap/js/bootstrap.js"></script>
 
-    </script>
+    <!-- Select Plugin Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/jquery-countto/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/raphael/raphael.min.js"></script>
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/morrisjs/morris.js"></script>
+
+    <!-- ChartJs -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/flot-charts/jquery.flot.js"></script>
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/flot-charts/jquery.flot.resize.js"></script>
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/flot-charts/jquery.flot.pie.js"></script>
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/flot-charts/jquery.flot.categories.js"></script>
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/flot-charts/jquery.flot.time.js"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <!-- Custom Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/js/admin.js"></script>
+    <script src="https://trollifyindustry.github.io/premjanghela/js/pages/index.js"></script>
+
+    <!-- Demo Js -->
+    <script src="https://trollifyindustry.github.io/premjanghela/js/demo.js"></script>
+  
 </body>
 </html>
+
+<!-----------------------Google-Sheet-Code-Start-------------------------------isse hoga ye hi id likh like A1 to google sheet se data A1 ka lake baha a jayga samjhe------------------------------------------------------->
+
+  <script>
+    // isse hoga ye hi id likh like A1 to google sheet se data A1 ka lake baha a jayga samjhe
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx1tmaL0Wu_Uq0VN96SBREsmnoFdGLNqCh_n9fPYt9jhMzkQKLlsKbzYfOlCfnR6fWI5w/exec';
+
+    // Google Sheet se data fetch karne ka function
+    async function fetchData() {
+      try {
+        const response = await fetch(scriptURL);
+        const data = await response.json();
+
+        // Har cell ID ke liye data display karne ka code
+        Object.keys(data).forEach(cellId => {
+          const element = document.getElementById(cellId);
+          if (element) {
+            element.textContent = data[cellId] || 'No Data';
+          }
+        });
+      } catch (error) {
+        console.error('Data fetch karne me error:', error);
+      }
+    }
+
+    // Page load hone par data fetch kare
+    fetchData();
+  </script>
+  
+  <!----- isi uper wali script ka code gs hai
+
+function doGet(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("dashboard");
+  const dataRange = sheet.getDataRange();
+  const data = dataRange.getValues();
+
+  // Create an object to store data based on cell IDs like "A1", "B2", etc.
+  let dataObject = {};
+  for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[i].length; j++) {
+      const cellId = sheet.getRange(i + 1, j + 1).getA1Notation();
+      dataObject[cellId] = data[i][j];
+    }
+  }
+  return ContentService.createTextOutput(JSON.stringify(dataObject)).setMimeType(ContentService.MimeType.JSON);
+}
+------>
+<!--------upwe wala code end---------------Google-Sheet-Code-Start-------------------------------isse hoga ye hi id likh like A1 to google sheet se data A1 ka lake baha a jayga samjhe------------------------------------------------------->
+
+
+ <!--Page-Password-Script-->
+  <script>
+    async function authenticate() {
+      const storedTime = localStorage.getItem('authTime');
+      const now = new Date().getTime();
+
+      if (storedTime && now - storedTime < 3600000) {
+        return;
+      }
+
+      localStorage.removeItem('authTime');
+
+      let authenticated = false;
+
+      while (!authenticated) {
+        const { value: password } = await Swal.fire({
+          title: '𝐖𝐄𝐋𝐂𝐎𝐌𝐄 ',
+          input: 'password',
+          inputLabel: 'Sahaja Nirmal Public School Khamra',
+          inputPlaceholder: 'Enter your password ',
+          inputAttributes: {
+            maxlength: 10,
+            autocapitalize: 'off',
+            autocorrect: 'off'
+          },
+          showCancelButton: false,
+          allowOutsideClick: false,
+          confirmButtonText: '𝗙𝗼𝗹𝗹𝗼𝘄 𝗺𝗲╰┈➤'
+        });
+
+        if (password === "1204") {
+          localStorage.setItem('authTime', new Date().getTime());
+          authenticated = true;
+          await Swal.fire({
+            icon: 'success',
+            title: 'Access Granted!',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } else {
+          await Swal.fire({
+            icon: 'error',
+            title: 'Wrong Password',
+            text: 'Please try again.'
+          });
+        }
+      }
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem('authTime');
+      Swal.fire({
+        icon: 'info',
+        title: 'Logged Out',
+        text: 'You have been logged out.',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        location.reload(); // Refresh page to prompt password again
+      });
+    });
+
+    window.onload = authenticate;
+  </script>
+  <!--End-Page-Password-Script-->
