@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attendance Form</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    .student {
+      margin-bottom: 15px;
+    }
+    select {
+      padding: 5px;
+      margin-left: 10px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter Code for Attendance</h2>
+  <input type="text" id="codeInput" placeholder="Enter Code">
+  <button onclick="loadStudents()">Load</button>
+
+  <form id="attendanceForm" style="display:none;">
+    <div id="studentsList"></div>
+    <button type="submit">Submit Attendance</button>
+  </form>
+
+  <script>
+    const sheetURL = 'https://script.google.com/macros/s/AKfycbyNSIkCfFu3vwSCLd1nOebyY42Ej2TvVbhP9bIl6JsrXWV7G75znRv4GtIzyaAmby3d7Q/exec'; // Replace with Web App URL
+    let matchedColumn = -1;
+    let students = [];
+
+    async function loadStudents() {
+      const code = document.getElementById('codeInput').value.trim();
+      if (!code) {
+        Swal.fire("Please enter a code");
+        return;
+      }
+
+      Swal.fire({
+        title: 'Checking Code...',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      try {
+        const response = await fetch(sheetURL);
+        const data = await response.json();
+
+        const headers = data[0];
+        matchedColumn = headers.indexOf(code);
+
+        if (matchedColumn === -1) {
+          Swal.fire("Error", "Code not found in sheet", "error");
+          return;
+        }
+
+        Swal.fire("Success", "Code matched. Students loaded.", "success");
+
+        students = data.map(row => row[0]).slice(1); // names from column A
+        const container = document.getElementById('studentsList');
+        container.innerHTML = '';
+        document.getElementById('attendanceForm').style.display = 'block';
+
+        students.forEach((name, i) => {
+          const row = i + 2; // because data starts from row 2
+          const div = document.createElement('div');
+          div.className = 'student';
+          div.innerHTML = `
+            <label>${name}:
+              <select name="${row}">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+              </select>
+            </label>
+          `;
+          container.appendChild(div);
+        });
+
+      } catch (error) {
+        Swal.fire("Error", "Failed to fetch data", "error");
+        console.error(error);
+      }
+    }
+
+    document.getElementById('attendanceForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const code = document.getElementById('codeInput').value.trim();
+      const form = e.target;
+      const selects = form.querySelectorAll('select');
+      const attendance = {};
+
+      selects.forEach(select => {
+        attendance[select.name] = select.value;
+      });
+
+      Swal.fire({
+        title: 'Submitting Attendance...',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      await fetch(sheetURL, { 
+        method: 'POST',
+        body: new URLSearchParams({
+          code: code,
+          attendance: JSON.stringify(attendance)
+        })
+      });
+
+      Swal.fire('Success', 'Attendance saved to Google Sheet', 'success');
+    });
+  </script>
+</body>
+</html>
+
+
+
+<!--------
+function doGet(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet2"); // Apne sheet ka naam yaha likho
+  const data = sheet.getDataRange().getValues(); // Puri sheet ka data
+  return ContentService
+         .createTextOutput(JSON.stringify(data))
+         .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet2"); // Apne sheet ka naam yaha likho
+  const code = e.parameter.code; // Code (jaise "02")
+  const attendance = JSON.parse(e.parameter.attendance); // Attendance object
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]; // First row headers
+  const colIndex = headers.indexOf(code); // Code kis column me match hua
+
+  if (colIndex === -1) {
+    return ContentService.createTextOutput("Invalid Code");
+  }
+
+  // attendance = { "2": "Present", "3": "Absent", ... }
+  for (const row in attendance) {
+    const status = attendance[row]; // Present/Absent
+    const rowIndex = parseInt(row);
+    sheet.getRange(rowIndex, colIndex + 1).setValue(status); // +1 because columns are 1-based
+  }
+
+  return ContentService.createTextOutput("Success");
+}
+----------->
