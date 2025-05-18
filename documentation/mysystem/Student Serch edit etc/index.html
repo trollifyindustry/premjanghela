@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Cards</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f2f2f2;
+      text-align: center;
+    }
+    #searchBar {
+      width: 300px;
+      padding: 10px;
+      margin: 20px auto;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      width: 250px;
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+    }
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+    }
+    .btn {
+      margin: 5px;
+      padding: 8px 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .edit-btn {
+      background: #28a745;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Student List</h2>
+<input type="text" id="searchBar" placeholder="Search by name, roll, class...">
+<div id="cardsContainer"></div>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycby6WRjhNbeyqibGQq0qU8Kw2rxL50jNvRfJxY8ANiD2dX6OrsYj30ZcDGKPdIplbB51_g/exec"; // Replace with your actual Apps Script URL
+let studentData = [];
+
+fetch(scriptURL)
+  .then(res => res.json())
+  .then(data => {
+    studentData = data;
+    showCards(studentData);
+  });
+
+function showCards(data) {
+  const container = document.getElementById("cardsContainer");
+  container.innerHTML = '';
+  data.forEach(student => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.setAttribute("data-name", student.name.toLowerCase());
+    card.setAttribute("data-roll", student.roll.toString().toLowerCase());
+    card.setAttribute("data-class", student.class.toLowerCase());
+
+    card.innerHTML = `
+      <img src="${student.photo}" alt="${student.name}">
+      <h3>${student.name}</h3>
+      <p>Roll: ${student.roll}</p>
+      <p>Class: ${student.class}</p>
+      <button class="btn" onclick="printCard('${student.roll}')">Print</button>
+      <button class="btn edit-btn" onclick="editCard('${student.roll}')">Edit</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function printCard(rollNumber) {
+  localStorage.setItem("selectedRoll", rollNumber);
+  window.location.href = "print.html";
+}
+
+function editCard(rollNumber) {
+  localStorage.setItem("selectedRoll", rollNumber);
+  window.location.href = "edit.html";
+}
+
+document.getElementById("searchBar").addEventListener("input", function () {
+  const query = this.value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const name = card.getAttribute("data-name");
+    const roll = card.getAttribute("data-roll");
+    const className = card.getAttribute("data-class");
+
+    if (name.includes(query) || roll.includes(query) || className.includes(query)) {
+      card.style.display = "inline-block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+<pre>
+https://script.google.com/macros/s/AKfycbxRFFCmSAqJivoxB4J-vX6Eg4hI894Qkx1_KTl__78WTdN--y8cu3hIlqqHyUredrvYmg/exec
+function doGet() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet3");
+  const data = sheet.getDataRange().getValues();
+  const output = [];
+
+  for (let i = 1; i < data.length; i++) {
+    output.push({
+      name: data[i][0],
+      roll: data[i][1],
+      class: data[i][2],
+      photo: data[i][3]
+    });
+  }
+
+  return ContentService.createTextOutput(JSON.stringify(output)).setMimeType(ContentService.MimeType.JSON);
+}
+</pre>

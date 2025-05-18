@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Invoice</title>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body      { font-family: Arial, sans-serif; background:#f9f9f9; text-align:center; padding:20px; }
+    #wrapper  { max-width:650px; margin:0 auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,.1); }
+    #invoice  { text-align:left; margin-top:30px; }
+    #invoice h3 { margin:0 0 15px; }
+    .row      { display:flex; justify-content:space-between; margin:6px 0; }
+    .label    { font-weight:600; }
+    button#printBtn { margin-top:25px; padding:10px 25px; font-size:16px; cursor:pointer; }
+
+    /* --- hide items on print --- */
+    @media print {
+      button#printBtn, #loadingOverlay { display:none !important; }
+      body { padding:0; }
+      #wrapper { box-shadow:none; margin:0; }
+    }
+
+    /* overlay spinner */
+    #loadingOverlay {
+      position:fixed; inset:0; background:rgba(255,255,255,.8); display:flex;
+      align-items:center; justify-content:center; font-size:22px; z-index:9999;
+    }
+  </style>
+</head>
+<body>
+
+<div id="wrapper">
+  <h2>Selected Roll Number</h2>
+  <input type="text" id="rollInput" readonly>
+
+  <!-- ==== INVOICE SECTION ==== -->
+  <div id="invoice">
+    <h3>Fee Invoice</h3>
+
+    <div class="row"><span class="label">Name:</span>        <span data-col="C"></span></div>
+    <div class="row"><span class="label">Class / Course:</span> <span data-col="D"></span></div>
+    <div class="row"><span class="label">Roll No:</span>     <span data-col="B"></span></div>
+    <div class="row"><span class="label">Total Fee:</span>   ₹<span data-col="E"></span></div>
+    <div class="row"><span class="label">Paid:</span>        ₹<span data-col="F"></span></div>
+    <div class="row"><span class="label">Pending:</span>     ₹<span data-col="G"></span></div>
+  </div>
+
+  <button id="printBtn" onclick="window.print()">Print Invoice</button>
+</div>
+
+<!-- spinner -->
+<div id="loadingOverlay">Loading&nbsp;⏳</div>
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycbziL32Eml2p_t1VeqmkTOETQvu6azbZjOaxut6W1jfExRmN266Ag4s7V7se59_NHplwuw/exec";   // <-- Paste your Web App URL
+  const roll = localStorage.getItem("selectedRoll");
+  document.getElementById('rollInput').value = roll || "Not Found";
+
+  // === fetch data & fill invoice ===
+  fetch(scriptURL, {
+    method : 'POST',
+    body   : new URLSearchParams({ roll })
+  })
+  .then(r => r.json())
+  .then(obj => {
+    if (obj.status === 'success') {
+      // Fill all spans having data-col attribute
+      document.querySelectorAll('[data-col]').forEach(el => {
+        const colLetter = el.getAttribute('data-col');
+        // column B (roll) directly shown from localStorage
+        if (colLetter === 'B') el.textContent = roll;
+        else                   el.textContent = obj[colLetter] ?? '';
+      });
+    } else {
+      Swal.fire('Oops','Roll number not found!','error');
+    }
+  })
+  .catch(() => Swal.fire('Error','Could not connect to server','error'))
+  .finally(() => document.getElementById('loadingOverlay').style.display = 'none');
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+<pre>
+function doPost(e) {
+  const sh  = SpreadsheetApp.getActive().getSheetByName('Sheet3');
+  const roll = e.parameter.roll;
+
+  // ------- 1) FETCH by roll (column B) -------
+  if (roll) {
+    const data = sh.getDataRange().getValues();   // 2-D array
+    for (let i = 1; i < data.length; i++) {       // start from row-2 (skip header)
+      if (data[i][1] == roll) {                   // col-B index = 1
+        // Pack whole row as object:  A-col=0, B-col=1, ...
+        return ContentService.createTextOutput(
+          JSON.stringify({
+            status : 'success',
+            row    : i + 1,          // 1-based row number
+            C : data[i][2],          // Name
+            D : data[i][3],          // Class
+            E : data[i][4],          // Total
+            F : data[i][5],          // Paid
+            G : data[i][6]           // Pending
+          })
+        ).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    return ContentService.createTextOutput(
+      JSON.stringify({status:'not_found'})
+    );
+  }
+
+  return ContentService.createTextOutput('invalid_request');
+}
+</pre>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Student</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+      font-size: 18px;
+    }
+    #spinner {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Edit Student Info</h2>
+<input type="text" id="rollInput" readonly><br>
+<label>Name:</label><br><input type="text" id="name"><br>
+<label>Class:</label><br><input type="text" id="class"><br>
+<label>Phone:</label><br><input type="text" id="phone"><br>
+<br>
+<button onclick="confirmUpdate()">Update</button>
+
+<div id="spinner">
+  <p>Please wait...</p>
+</div>
+
+<script>
+  const scriptURL = "https://script.google.com/macros/s/AKfycby5NlOtn8TlZ0vsXR1PZK4Thgdfw8JrFYX1ouWaN3e5xRl14NAndbBrlafTxugFEr7urA/exec";
+  const roll = localStorage.getItem("selectedRoll");
+  let currentRow;
+
+  document.getElementById("rollInput").value = roll || "Not Found";
+
+  // Spinner while loading data
+  Swal.fire({
+    title: 'Loading data...',
+    didOpen: () => {
+      Swal.showLoading()
+    }
+  });
+
+  fetch(scriptURL, {
+    method: 'POST',
+    body: new URLSearchParams({ roll: roll })
+  })
+  .then(res => res.json())
+  .then(data => {
+    Swal.close();
+    if (data.status === "success") {
+      currentRow = data.row;
+      document.getElementById("name").value = data.name;
+      document.getElementById("class").value = data.class;
+      document.getElementById("phone").value = data.phone;
+    } else {
+      Swal.fire('Error', 'Roll number not found', 'error');
+    }
+  });
+
+  function confirmUpdate() {
+    Swal.fire({
+      title: 'Are you sure?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, update it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        updateData();
+      }
+    });
+  }
+
+  function updateData() {
+    const updatedName = document.getElementById("name").value;
+    const updatedClass = document.getElementById("class").value;
+    const updatedPhone = document.getElementById("phone").value;
+
+    Swal.fire({
+      title: 'Updating...',
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    });
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: new URLSearchParams({
+        row: currentRow,
+        name: updatedName,
+        class: updatedClass,
+        phone: updatedPhone
+      })
+    })
+    .then(res => res.text())
+    .then(response => {
+      Swal.close();
+      if (response.trim() === "updated") {
+        Swal.fire('Success', 'Data updated successfully!', 'success');
+      } else {
+        Swal.fire('Error', 'Failed to update data', 'error');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
+
+
+<!-------
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActive().getSheetByName("Sheet3");
+
+  const roll = e.parameter.roll;
+  const row = e.parameter.row;
+
+  if (roll) {
+    const data = sheet.getDataRange().getValues();
+    for (let i = 1; i < data.length; i++) {
+      if (data[i][1] == roll) {
+        return ContentService.createTextOutput(JSON.stringify({
+          status: "success",
+          row: i + 1,
+          name: data[i][2],
+          class: data[i][3],
+          phone: data[i][4]
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    return ContentService.createTextOutput(JSON.stringify({ status: "not_found" }));
+  }
+
+  if (row) {
+    try {
+      sheet.getRange(row, 3).setValue(e.parameter.name);
+      sheet.getRange(row, 4).setValue(e.parameter.class);
+      sheet.getRange(row, 5).setValue(e.parameter.phone);
+      return ContentService.createTextOutput("updated");
+    } catch (err) {
+      return ContentService.createTextOutput("error");
+    }
+  }
+
+  return ContentService.createTextOutput("invalid");
+}
+------>
