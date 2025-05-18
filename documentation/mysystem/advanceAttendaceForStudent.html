@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance System</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    #codeInput {
+      padding: 10px;
+      width: 200px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px 0;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .student-card {
+      background: #fff;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .radio-group {
+      margin: 15px 0;
+    }
+    .radio-group label {
+      margin-right: 15px;
+    }
+    #summary {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Attendance System</h2>
+  <input type="text" id="codeInput" placeholder="Enter Code (e.g. 02)">
+  <button onclick="loadData()">Load Students</button>
+
+  <div class="radio-group" id="bulkSelect" style="display: none;">
+    <label><input type="radio" name="markAll" onclick="markAll('Present')"> Present All</label>
+    <label><input type="radio" name="markAll" onclick="markAll('Absent')"> Absent All</label>
+    <label><input type="radio" name="markAll" onclick="markAll('')"> None</label>
+  </div>
+
+  <div id="studentList"></div>
+  <div id="summary" style="display:none;"></div>
+  <button onclick="submitAttendance()">Submit Attendance</button>
+
+  <script>
+    let sheetData = [];
+    let currentCode = '';
+    let codeColumnIndex = -1;
+
+    async function loadData() {
+      const code = document.getElementById('codeInput').value.trim();
+      if (!code) return alert("Please enter a code.");
+
+      Swal.fire({
+        title: 'Loading Students...',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      try {
+        const url = 'https://script.google.com/macros/s/AKfycbwsntyHb3zWFaAEuxTLd_yLRcaL9MiPzi4D8LBmT5TrRVd01tk9lNVSoCAD6ok6uppaUg/exec';
+        const res = await fetch(url);
+        const data = await res.json();
+        sheetData = data;
+
+        const headers = data[0];
+        codeColumnIndex = headers.indexOf(code);
+        if (codeColumnIndex === -1) {
+          Swal.close();
+          alert("Code not found in the sheet header.");
+          return;
+        }
+
+        currentCode = code;
+        displayStudents(data);
+        document.getElementById('bulkSelect').style.display = 'block';
+        Swal.close();
+      } catch (error) {
+        Swal.fire("Error", "Failed to load data.", "error");
+      }
+    }
+
+    function displayStudents(data) {
+      const container = document.getElementById('studentList');
+      container.innerHTML = '';
+      for (let i = 1; i < data.length; i++) {
+        const name = data[i][0];
+        if (!name) continue;
+
+        const currentStatus = data[i][codeColumnIndex] || '';
+
+        const card = document.createElement('div');
+        card.className = 'student-card';
+        card.innerHTML = `
+          <strong>${name}</strong><br>
+          <select id="status-${i}" required onchange="refreshSummary()">
+            <option value="">--Select--</option>
+            <option value="Present" ${currentStatus === "Present" ? "selected" : ""}>Present</option>
+            <option value="Absent" ${currentStatus === "Absent" ? "selected" : ""}>Absent</option>
+          </select>
+        `;
+        container.appendChild(card);
+      }
+
+      refreshSummary();
+    }
+
+    function markAll(status) {
+      for (let i = 1; i < sheetData.length; i++) {
+        const name = sheetData[i][0];
+        if (!name) continue;
+
+        const select = document.getElementById(`status-${i}`);
+        if (select) {
+          select.value = status;
+        }
+      }
+      refreshSummary();
+    }
+
+    function refreshSummary() {
+      let present = 0, absent = 0;
+      let absentNames = [];
+
+      for (let i = 1; i < sheetData.length; i++) {
+        const name = sheetData[i][0];
+        if (!name) continue;
+
+        const select = document.getElementById(`status-${i}`);
+        if (select && select.value === "Present") present++;
+        if (select && select.value === "Absent") {
+          absent++;
+          absentNames.push(name);
+        }
+      }
+
+      const summaryDiv = document.getElementById('summary');
+      summaryDiv.style.display = 'block';
+      summaryDiv.innerHTML = `
+        <h3>Summary</h3>
+        <p><strong>Total Present:</strong> ${present}</p>
+        <p><strong>Total Absent:</strong> ${absent}</p>
+        ${absentNames.length ? `<p><strong>Absent Students:</strong><br>${absentNames.join('<br>')}</p>` : ''}
+      `;
+    }
+
+    async function submitAttendance() {
+      const allSelects = document.querySelectorAll('select');
+      for (const sel of allSelects) {
+        if (!sel.value) {
+          sel.focus();
+          Swal.fire("Incomplete", "Please mark all students before submitting.", "warning");
+          return;
+        }
+      }
+
+      const confirm = await Swal.fire({
+        title: "Are you sure?",
+        text: "You want to submit the attendance?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Submit",
+        allowOutsideClick: false
+      });
+
+      if (!confirm.isConfirmed) return;
+
+      Swal.fire({
+        title: "Submitting...",
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      const attendance = {};
+      for (let i = 1; i < sheetData.length; i++) {
+        const name = sheetData[i][0];
+        if (!name) continue;
+
+        const select = document.getElementById(`status-${i}`);
+        if (select && select.value) {
+          attendance[i + 1] = select.value;
+        }
+      }
+
+      const formData = new FormData();
+      formData.append('code', currentCode);
+      formData.append('attendance', JSON.stringify(attendance));
+
+      try {
+        const res = await fetch('https://script.google.com/macros/s/AKfycbwsntyHb3zWFaAEuxTLd_yLRcaL9MiPzi4D8LBmT5TrRVd01tk9lNVSoCAD6ok6uppaUg/exec', {
+          method: 'POST',
+          body: formData
+        });
+
+        const text = await res.text();
+        Swal.close();
+
+        if (text === "Success") {
+          Swal.fire("Done!", "Attendance submitted successfully.", "success");
+        } else {
+          Swal.fire("Error", text, "error");
+        }
+      } catch (error) {
+        Swal.fire("Error", "Something went wrong while submitting.", "error");
+      }
+    }
+  </script>
+
+</body>
+</html>
+<pre>
+function doGet(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet2");
+  const data = sheet.getDataRange().getValues();
+  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet2");
+  const code = e.parameter.code;
+  const attendance = JSON.parse(e.parameter.attendance);
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const colIndex = headers.indexOf(code);
+
+  if (colIndex === -1) {
+    return ContentService.createTextOutput("Invalid Date");
+  }
+
+  for (const row in attendance) {
+    const status = attendance[row];
+    sheet.getRange(parseInt(row), colIndex + 1).setValue(status);
+  }
+
+  return ContentService.createTextOutput("Success");
+}
+</pre>
