@@ -1,0 +1,53 @@
+<pre>
+AutoSync Google Sheets - Setup Instructions
+
+Step 1: Open Spreadsheet B (destination sheet).
+
+Step 2: Go to Extensions > Apps Script.
+
+Step 3: Paste this code:
+
+function syncFromAtoB() {
+  try {
+    // 🔗 Spreadsheet A ka ID aur Sheet name
+    var sourceSpreadsheetId = "1cBSHBKKYQDtocy7NCoPdTL_9jKXUY6kI8U0TCZDF7UA"; // <- Replace karo
+    var sourceSheetName = "Sheet1";
+
+    // 📥 Data read karo Spreadsheet A se
+    var sourceSheet = SpreadsheetApp.openById(sourceSpreadsheetId).getSheetByName(sourceSheetName);
+    var data = sourceSheet.getDataRange().getValues();
+
+    // 📤 Apne (Spreadsheet B) Sheet1 me paste karo
+    var targetSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
+    targetSheet.clearContents();
+    targetSheet.getRange(1, 1, data.length, data[0].length).setValues(data);
+
+  } catch (err) {
+    Logger.log("❌ Error: " + err.message);
+  }
+}
+
+Step 4: Replace "PASTE_SPREADSHEET_A_ID_HERE" with your actual Spreadsheet A ID.
+
+Step 5: Save the project.
+
+Step 6: Run the function syncFromAtoB manually once:
+- Click on the function dropdown, select syncFromAtoB.
+- Click the Run ▶️ button.
+- Authorize permissions when prompted.
+
+Step 7: Set up automatic trigger:
+- In Apps Script editor, click the Triggers (clock) icon.
+- Click "+ Add Trigger".
+- Select function: syncFromAtoB.
+- Event source: Time-driven.
+- Type of time-based trigger: Every 5 minutes (or your preferred interval).
+- Save the trigger.
+
+Now Spreadsheet B will sync data from Spreadsheet A every 5 minutes automatically.
+
+Note:  
+- Make sure you have view/edit access to Spreadsheet A.  
+- Spreadsheet B's Sheet1 data will be overwritten every sync.  
+- For near real-time sync, script on Spreadsheet A with onEdit trigger is required.
+</pre>
